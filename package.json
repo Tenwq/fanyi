@@ -1,0 +1,31 @@
+{
+  "name": "fanyi",
+  "version": "1.0.0",
+  "description": "一个基于大模型API的浏览器翻译插件， 支持多种AI提供商的翻译服务。",
+  "main": "background.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node build.js",
+    "build:vite": "vite build",
+    "preview": "vite preview",
+    "build:watch": "vite build --watch",
+    "clean": "rm -rf dist",
+    "package": "npm run build && cd dist && zip -r ../extension.zip ."
+  },
+  "keywords": [
+    "chrome-extension",
+    "translation",
+    "ai",
+    "openai",
+    "browser-extension"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "^0.1.1",
+    "terser": "^5.43.1",
+    "vite": "^4.5.3",
+    "vite-plugin-html": "^3.2.2"
+  }
+}

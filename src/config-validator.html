@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>API配置验证工具</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    input[type="text"]:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    button {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .btn-primary {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .btn-primary:hover {
+      background-color: #45a049;
+    }
+    .btn-secondary {
+      background-color: #2196F3;
+      color: white;
+    }
+    .btn-secondary:hover {
+      background-color: #1976D2;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    .success {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+    }
+    .error {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
+    .info {
+      background-color: #d1ecf1;
+      border: 1px solid #bee5eb;
+      color: #0c5460;
+    }
+    .preset-configs {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+    }
+    .preset-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid #ddd;
+    }
+    .preset-item:hover {
+      border-color: #4CAF50;
+    }
+    .preset-title {
+      font-weight: bold;
+      color: #333;
+    }
+    .preset-details {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 API配置验证工具</h1>
+    
+    <div class="form-group">
+      <label for="apiKey">API Key:</label>
+      <input type="text" id="apiKey" placeholder="输入您的API Key">
+    </div>
+    
+    <div class="form-group">
+      <label for="apiEndpoint">API Endpoint:</label>
+      <input type="text" id="apiEndpoint" placeholder="输入API Endpoint地址">
+    </div>
+    
+    <div class="form-group">
+      <label for="modelName">模型名称:</label>
+      <input type="text" id="modelName" placeholder="输入模型名称 (如 gpt-3.5-turbo)">
+    </div>
+    
+    <div class="button-group">
+      <button class="btn-primary" id="validateBtn">🔍 验证配置</button>
+      <button class="btn-secondary" id="testBtn">🌐 测试翻译</button>
+      <button class="btn-secondary" id="loadBtn">📥 加载当前配置</button>
+    </div>
+    
+    <div id="result"></div>
+    
+    <div class="preset-configs">
+      <h3>📋 预设配置模板</h3>
+      
+      <div class="preset-item" data-preset="openai">
+        <div class="preset-title">OpenAI (推荐)</div>
+        <div class="preset-details">Endpoint: https://api.openai.com/v1/chat/completions<br>模型: gpt-3.5-turbo</div>
+      </div>
+      
+      <div class="preset-item" data-preset="zhipu">
+        <div class="preset-title">智谱AI (GLM)</div>
+        <div class="preset-details">Endpoint: https://open.bigmodel.cn/api/paas/v4/chat/completions<br>模型: glm-4</div>
+      </div>
+      
+      <div class="preset-item" data-preset="qwen">
+        <div class="preset-title">阿里通义千问</div>
+        <div class="preset-details">Endpoint: https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation<br>模型: qwen-turbo</div>
+      </div>
+      
+      <div class="preset-item" data-preset="baidu">
+        <div class="preset-title">百度千帆</div>
+        <div class="preset-details">Endpoint: https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions<br>模型: ernie-bot-turbo</div>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module" src="config-validator.js"></script>
+</body>
+</html>

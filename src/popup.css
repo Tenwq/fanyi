@@ -1,0 +1,82 @@
+body {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  padding: 10px;
+}
+h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+textarea {
+  width: 95%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+button:hover {
+  background-color: #45a049;
+}
+
+/* Loading状态样式 */
+button.loading {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+button.loading:hover {
+  background-color: #cccccc;
+}
+
+/* Loading旋转动画 */
+button.loading::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid #ffffff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 旋转动画关键帧 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Loading状态下隐藏按钮文字 */
+button.loading .button-text {
+  opacity: 0;
+}
+#translationResult {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #eee;
+  background-color: #f9f9f9;
+  min-height: 50px;
+  word-wrap: break-word;
+}
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
