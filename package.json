@@ -11,7 +11,12 @@
     "preview": "vite preview",
     "build:watch": "vite build --watch",
     "clean": "rm -rf dist",
-    "package": "npm run build && cd dist && zip -r ../extension.zip ."
+    "package": "npm run build && cd dist && zip -r ../extension.zip .",
+    "release": "node release.js",
+    "version:patch": "npm version patch && npm run sync-version",
+    "version:minor": "npm version minor && npm run sync-version",
+    "version:major": "npm version major && npm run sync-version",
+    "sync-version": "node -e \"const pkg=require('./package.json');const manifest=require('./manifest.json');manifest.version=pkg.version;require('fs').writeFileSync('./manifest.json',JSON.stringify(manifest,null,2))\""
   },
   "keywords": [
     "chrome-extension",

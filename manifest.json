@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "大模型翻译插件",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "一个使用大模型进行内容翻译的浏览器插件。",
   "permissions": [
     "storage"
