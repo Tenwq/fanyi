@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  width: 300px;
+  width: 320px;
   padding: 10px;
 }
 h1 {
@@ -79,4 +79,87 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+
+/* 语言选择器样式 */
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.language-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.language-group label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.language-group select {
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.language-group select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.language-swap {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 2px;
+}
+
+.language-swap button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-swap button:hover {
+  background-color: #5a6268;
+  transform: rotate(180deg);
+}
+
+/* 检测到的语言显示 */
+.detected-language {
+  font-size: 12px;
+  color: #28a745;
+  margin-bottom: 8px;
+  padding: 4px 8px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  display: none;
+}
+
+.detected-language.show {
+  display: block;
 }

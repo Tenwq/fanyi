@@ -4,7 +4,7 @@
  */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'translate') {
-    translateText(request.text)
+    translateText(request.text, request.sourceLanguage, request.targetLanguage)
       .then(translatedText => sendResponse({ translatedText }))
       .catch(error => sendResponse({ error: error.message }));
     return true; // 表示异步响应
@@ -12,11 +12,52 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 /**
- * 调用大模型 API 进行文本翻译。
- * @param {string} text - 需要翻译的文本。
- * @returns {Promise<string>} - 翻译后的文本。
+ * 语言代码映射表
  */
-async function translateText(text) {
+const LANGUAGE_NAMES = {
+  'zh': '中文',
+  'en': '英文',
+  'ja': '日语',
+  'auto': '自动检测'
+};
+
+/**
+ * 生成翻译提示词
+ * @param {string} text - 要翻译的文本
+ * @param {string} sourceLanguage - 源语言代码
+ * @param {string} targetLanguage - 目标语言代码
+ * @returns {string} 翻译提示词
+ */
+function generateTranslationPrompt(text, sourceLanguage, targetLanguage) {
+  const sourceLangName = LANGUAGE_NAMES[sourceLanguage] || sourceLanguage;
+  const targetLangName = LANGUAGE_NAMES[targetLanguage] || targetLanguage;
+  
+  let prompt = '';
+  
+  if (sourceLanguage === 'auto') {
+    prompt = `请将以下文本翻译成${targetLangName}，保持原文的语气和风格：\n\n${text}`;
+  } else {
+    prompt = `请将以下${sourceLangName}文本翻译成${targetLangName}，保持原文的语气和风格：\n\n${text}`;
+  }
+  
+  // 添加翻译质量要求
+  prompt += '\n\n翻译要求：';
+  prompt += '\n1. 保持原文的意思和语气';
+  prompt += '\n2. 使用自然流畅的表达';
+  prompt += '\n3. 如果是专业术语，请保持准确性';
+  prompt += '\n4. 只返回翻译结果，不要包含其他解释';
+  
+  return prompt;
+}
+
+/**
+ * 调用大模型 API 进行文本翻译。
+ * @param {string} text - 需要翻译的文本
+ * @param {string} sourceLanguage - 源语言代码
+ * @param {string} targetLanguage - 目标语言代码
+ * @returns {Promise<string>} - 翻译后的文本
+ */
+async function translateText(text, sourceLanguage = 'auto', targetLanguage = 'zh') {
   return new Promise(async (resolve, reject) => {
     const defaultEndpoint = 'https://api.openai.com/v1/chat/completions'; // 默认 OpenAI 兼容 API
 
@@ -41,7 +82,7 @@ async function translateText(text) {
             model: modelName,
             messages: [{
               role: 'user',
-              content: `Translate the following text into Chinese: ${text}`
+              content: generateTranslationPrompt(text, sourceLanguage, targetLanguage)
             }],
             temperature: 0.7
           })

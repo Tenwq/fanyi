@@ -1,6 +1,6 @@
 {
   "name": "fanyi",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "一个基于大模型API的浏览器翻译插件， 支持多种AI提供商的翻译服务。",
   "main": "background.js",
   "type": "module",

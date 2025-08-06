@@ -7,6 +7,36 @@
 </head>
 <body>
   <h1>大模型翻译</h1>
+  
+  <!-- 语言选择区域 -->
+  <div class="language-selector">
+    <div class="language-group">
+      <label for="sourceLanguage">源语言:</label>
+      <select id="sourceLanguage">
+        <option value="auto">自动检测</option>
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
+    </div>
+    
+    <div class="language-swap">
+      <button id="swapLanguages" title="交换语言">⇄</button>
+    </div>
+    
+    <div class="language-group">
+      <label for="targetLanguage">目标语言:</label>
+      <select id="targetLanguage">
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
+    </div>
+  </div>
+  
+  <!-- 检测到的语言显示 -->
+  <div id="detectedLanguage" class="detected-language"></div>
+  
   <textarea id="inputText" placeholder="输入要翻译的内容"></textarea>
   <button id="translateButton"><span class="button-text">翻译</span></button>
   <div id="translationResult"></div>
