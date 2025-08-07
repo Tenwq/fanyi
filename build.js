@@ -56,7 +56,7 @@ async function buildExtension() {
       mkdirSync(iconsDir, { recursive: true });
     }
     
-    const iconFiles = ['icon16.png', 'icon48.png', 'icon128.png'];
+    const iconFiles = ['icon16.png', 'icon48.png', 'icon128.png', 'icon256.png', 'icon512.png'];
     iconFiles.forEach(iconFile => {
       const srcPath = resolve(__dirname, 'icons', iconFile);
       const destPath = resolve(iconsDir, iconFile);
